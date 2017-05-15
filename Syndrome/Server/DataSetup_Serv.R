@@ -23,8 +23,12 @@ library(reshape2)
 ## Data ##
 
 
+#sdSim = seq(from = 0,to = .5, by = 0.01)
 sdSim = c(.01,.05,.1,.5)
-pMat = as.matrix(rbind(rep(1/3,3),c(.5,.25,.25),c(.5,.40,.1)),nrow = 3)
+#pMat = as.matrix(rbind(rep(1/3,3),c(1,.25,.25),c(.5,.40,.1)),nrow = 3)
+pMat = as.matrix(rbind(rep(1/3,3),c(.5,.25,.25),c(.5,.4,.10),
+                       c(.5,.5,0), c(.75,.25,0),c(.9,.10,0),
+                       c(1,0,0)),nrow = 7)
 
 set1 = readRDS('set1a.RDA') #Syndrome 1
 set2 = readRDS('set2a.RDA') #Syndrome 2

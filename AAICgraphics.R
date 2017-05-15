@@ -151,25 +151,31 @@ dev.off()
 ## 4a, 2 curves
 df = data.frame(AgeE = seq(55,80,by = .1),AgeL =seq(75,100,by = .1))
 base = ggplot()
-g4a = base+
-  stat_function(data = df,fun = f1,aes(x = AgeE,color = 'Marker 1'),size =1)+
-  stat_function(data = df,fun = f2,aes(x = AgeE,color = 'Marker 2'),size =1)+
+g4a = base+theme_classic()+
+  stat_function(data = df,fun = f1,aes(x = AgeE,linetype = 'Marker 1'),size =1)+
+  stat_function(data = df,fun = f2,aes(x = AgeE,linetype = 'Marker 2'),size =1)+
   theme(legend.position='bottom',plot.title = element_text(size = 10),legend.title=element_blank(),
         legend.text = element_text(size = 10),legend.key.size = unit(1, "cm"))+
   theme(axis.title.x = element_text(size = 10),axis.title.y = element_text(size = 10))+
   theme(axis.text.x = element_text(size = 10,face = 'bold',color = 'black'))+
   theme(axis.text.y = element_text(size = 10,face = 'bold',color = 'black'))+
-  ylab("Biomarker Severity")+xlab("Age")+ylim(0.001,.999)+scale_color_manual(values=myColors)
-l4a = base+
-  stat_function(data = df,fun = l1,aes(x = AgeE,color = 'Marker 1'),size =1)+
-  stat_function(data = df,fun = l2,aes(x = AgeE,color = 'Marker 2'),size =1)+
+  ylab("Biomarker Severity")+xlab("Age")+ylim(0.001,.999)+scale_color_manual(values=myColors)+
+  theme(legend.position = 'bottom')+
+  theme(legend.key.size = unit(1.5, "cm"),
+        legend.text = element_text(size =16))+
+  theme(axis.text.x= element_text(size = 20), 
+        axis.text.y= element_text(size = 20), axis.title.x = element_text(size = 24), 
+        axis.title.y = element_text(size = 24)) 
+l4a = base+theme_classic()+
+  stat_function(data = df,fun = l1,aes(x = AgeE,linetype = 'Marker 1'),size =1)+
+  stat_function(data = df,fun = l2,aes(x = AgeE,linetype = 'Marker 2'),size =1)+
   theme(legend.position='bottom',plot.title = element_text(size = 10),legend.title=element_blank(),
         legend.text = element_text(size = 10),legend.key.size = unit(1.45, "cm"))+
   theme(axis.title.x = element_text(size = 10),axis.title.y = element_text(size = 10))+
   theme(axis.text.x = element_text(size = 10,face = 'bold',color = 'black'))+
   theme(axis.text.y = element_text(size = 10,face = 'bold',color = 'black'))+
   ylab("Linear Representation")+xlab("Age")+scale_color_manual(values=myColors)+
-  geom_vline(xintercept = c(65,70),linetype = 'dotted',size = 1)
+  geom_vline(xintercept = c(65,70),linetype = 'longdash',size = 1)
 mylegendg4ls = g_legend(g4a)
 ll4 <- ggplot_build(l4a)
 lf2 <- data.frame(x = ll4$data[[1]]$x[which(ll4$data[[1]]$x>=65&ll4$data[[1]]$x<=70)],
@@ -178,8 +184,12 @@ lf2 <- data.frame(x = ll4$data[[1]]$x[which(ll4$data[[1]]$x>=65&ll4$data[[1]]$x<
 
 # use the loess data to add the 'ribbon' to plot 
 l4S = l4a + geom_ribbon(data = lf2, aes(x = x, ymin = ymin, ymax = ymax),
-              fill = "grey1", alpha = 0.4)
-png('figures/g4ls.png',width = 800)
+              fill = "grey1", alpha = 0.4)+
+  theme(axis.text.x= element_text(size = 20), 
+        axis.text.y= element_text(size = 20), axis.title.x = element_text(size = 24), 
+        axis.title.y = element_text(size = 24)) 
+
+png('/Users/Teresa/Documents/Dissertation/SyndromeClassification/SAGE/figures/g4ls.png',width = 800)
 g4ls<-grid.arrange(arrangeGrob(g4a + theme(legend.position="none"),
                                l4S + theme(legend.position="none"),
                                nrow=1),

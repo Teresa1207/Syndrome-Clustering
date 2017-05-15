@@ -1,0 +1,299 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>TableID155b421d86ab</title>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<style type="text/css">
+body {
+  color: #444444;
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: 75%;
+  }
+  a {
+  color: #4D87C7;
+  text-decoration: none;
+}
+</style>
+</head>
+<body>
+ <!-- Table generated in R 3.3.2 by googleVis 0.6.2 package -->
+<!-- Mon Apr 24 00:00:43 2017 -->
+
+
+<!-- jsHeader -->
+<script type="text/javascript">
+ 
+// jsData 
+function gvisDataTableID155b421d86ab () {
+var data = new google.visualization.DataTable();
+var datajson =
+[
+ [
+"Ray Allen",
+"SG",
+73,
+2621,
+439,
+987,
+180,
+452,
+215,
+237
+],
+[
+"Tony Allen",
+"PG",
+75,
+1377,
+169,
+388,
+18,
+57,
+138,
+181
+],
+[
+"Pj Brown",
+"PF",
+18,
+208,
+14,
+41,
+0,
+1,
+11,
+16
+],
+[
+"Sam Cassell",
+"PG",
+55,
+1274,
+233,
+532,
+23,
+76,
+127,
+144
+],
+[
+"Glen Davis",
+"SF",
+69,
+941,
+107,
+221,
+0,
+0,
+99,
+150
+],
+[
+"Kevin Garnett",
+"PF",
+71,
+2329,
+534,
+990,
+0,
+11,
+269,
+336
+],
+[
+"Eddie House",
+"SG",
+78,
+1481,
+217,
+530,
+117,
+298,
+33,
+36
+],
+[
+"Kendrick Perkins",
+"C",
+78,
+1912,
+214,
+349,
+0,
+1,
+114,
+183
+],
+[
+"Paul Pierce",
+"SF",
+80,
+2873,
+509,
+1098,
+143,
+365,
+409,
+485
+],
+[
+"Scot Pollard",
+"C",
+22,
+173,
+12,
+23,
+0,
+0,
+15,
+22
+],
+[
+"James Posey",
+"SF",
+74,
+1816,
+173,
+414,
+106,
+279,
+93,
+115
+],
+[
+"Leon Powe",
+"SF",
+56,
+809,
+154,
+268,
+0,
+1,
+137,
+193
+],
+[
+"Gabe Pruitt",
+"PG",
+15,
+96,
+14,
+39,
+3,
+12,
+1,
+2
+],
+[
+"Rajon Rondo",
+"PG",
+77,
+2308,
+351,
+713,
+5,
+19,
+107,
+175
+],
+[
+"Brian Scalabrine",
+"PF",
+48,
+512,
+29,
+94,
+15,
+46,
+15,
+20
+] 
+];
+data.addColumn('string','Name');
+data.addColumn('string','Position');
+data.addColumn('number','GamesPlayed');
+data.addColumn('number','TotalMinutesPlayed');
+data.addColumn('number','FieldGoalsMade');
+data.addColumn('number','FieldGoalsAttempted');
+data.addColumn('number','ThreesMade');
+data.addColumn('number','ThreesAttempted');
+data.addColumn('number','FreeThrowsMade');
+data.addColumn('number','FreeThrowsAttempted');
+data.addRows(datajson);
+return(data);
+}
+ 
+// jsDrawChart
+function drawChartTableID155b421d86ab() {
+var data = gvisDataTableID155b421d86ab();
+var options = {};
+options["allowHtml"] = true;
+
+
+    var chart = new google.visualization.Table(
+    document.getElementById('TableID155b421d86ab')
+    );
+    chart.draw(data,options);
+    
+
+}
+  
+ 
+// jsDisplayChart
+(function() {
+var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+var chartid = "table";
+  
+// Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
+var i, newPackage = true;
+for (i = 0; newPackage && i < pkgs.length; i++) {
+if (pkgs[i] === chartid)
+newPackage = false;
+}
+if (newPackage)
+  pkgs.push(chartid);
+  
+// Add the drawChart function to the global list of callbacks
+callbacks.push(drawChartTableID155b421d86ab);
+})();
+function displayChartTableID155b421d86ab() {
+  var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+  var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+  window.clearTimeout(window.__gvisLoad);
+  // The timeout is set to 100 because otherwise the container div we are
+  // targeting might not be part of the document yet
+  window.__gvisLoad = setTimeout(function() {
+  var pkgCount = pkgs.length;
+  google.load("visualization", "1", { packages:pkgs, callback: function() {
+  if (pkgCount != pkgs.length) {
+  // Race condition where another setTimeout call snuck in after us; if
+  // that call added a package, we must not shift its callback
+  return;
+}
+while (callbacks.length > 0)
+callbacks.shift()();
+} });
+}, 100);
+}
+ 
+// jsFooter
+</script>
+ 
+<!-- jsChart -->  
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartTableID155b421d86ab"></script>
+ 
+<!-- divChart -->
+  
+<div id="TableID155b421d86ab" 
+  style="width: 500; height: automatic;">
+</div>
+ <div><span>Data: nba0708.bos[, c(2, 4:12)] &#8226; Chart ID: <a href="Chart_TableID155b421d86ab.html">TableID155b421d86ab</a> &#8226; <a href="https://github.com/mages/googleVis">googleVis-0.6.2</a></span><br /> 
+<!-- htmlFooter -->
+<span> 
+  R version 3.3.2 (2016-10-31) 
+  &#8226; <a href="https://developers.google.com/terms/">Google Terms of Use</a> &#8226; <a href="https://google-developers.appspot.com/chart/interactive/docs/gallery/table">Documentation and Data Policy</a>
+</span></div>
+</body>
+</html>

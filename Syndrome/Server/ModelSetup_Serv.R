@@ -153,3 +153,73 @@ saveRDS(set1,file = 'set1a.RDA')
 saveRDS(set2,file = 'set2a.RDA')
 saveRDS(set3,file = 'set3a.RDA')
 
+## Plot the two syndromes
+dontrun2= function(d){
+  lag1 = ggplot(data = syn1)+
+    geom_histogram(aes(t2-t1,fill = "Marker 1 and Marker 2 Lag"),binwidth = 1)+
+    geom_histogram(aes(t3-t1,fill = "Marker 1 and Marker 3 Lag"),binwidth = 1)+
+    scale_fill_manual(values=myColors)+
+    xlab('Lag between Marker Abnormality')+ylab("")
+  lag2 = ggplot(data = syn2)+
+    geom_histogram(aes(t2-t1,fill = "Marker 1 and Marker 2 Lag"),binwidth = 1)+
+    geom_histogram(aes(t3-t1,fill = "Marker 1 and Marker 3 Lag"),binwidth = 1)+
+    scale_fill_manual(values=myColors)+
+    xlab('Lag between Marker Abnormality')+ylab("")
+  
+}
+
+
+### CURVES
+dontrun = function(n){
+
+  png('~/Documents/Dissertation/Dissertation_2017/figures/subCurves.png',width = 800)
+  par(mfrow = c(1,3))
+  curve(A1.t,-10,30,n=n,col='black',xlab = 'Disease Time',ylab = "Marker Severity",main = 'Syndrome I')
+  counter = 1
+  while(counter<=nrow(syn1)){
+    A1.p = function(t){A1((t),B0=set1[counter,1],B1=set1[counter,2])}
+    A2.p = function(t){A1((t+syn1$delta[counter]-data2$lag1[counter]),B0=set1[counter,3],B1=set1[counter,4])}
+    A3.p = function(t){A1((t+syn1$delta[counter]-data2$lag1[counter]-data3$lag2[counter]),B0=set1[counter,5],B1=set1[counter,6])}
+    curve(A1.p,-10,30,n=n,add = TRUE,col = myColors[2])
+    curve(A2.p,-10,30,n = n, add = TRUE, col = myColors[3])
+    curve(A3.p,-10,30,n = n, add = TRUE, col = myColors[4])
+    counter = counter+1
+  }
+  curve(A1.t,-10,30,n=n,col='black',add = TRUE,lwd = 3)
+  curve(A2.t,-10,30,n=n,col='black',add = TRUE,lwd = 3)
+  curve(A3.t,-10,30,n=n,col='black',add = TRUE,lwd = 3)
+  
+  curve(B1.t,-10,30,n=n,col='black',xlab = 'Disease Time',ylab = "Marker Severity",main = 'Syndrome II')
+  counter = 1
+  while(counter<=nrow(syn2)){
+    B1.p = function(t){A1(t,B0=syn2[counter,1],B1=syn2[counter,2])}
+    B2.p = function(t){A1((t+syn2$delta[counter]-d2$lag1[counter]),B0=d2[counter,1],B1=d2[counter,2])}
+    B3.p = function(t){A1((t+syn2$delta[counter]-d3$lag2[counter]-d2$lag1[counter]),B0=d3[counter,1],B1=d3[counter,2])}
+    
+    curve(B1.p,-10,30,n=n,add = TRUE,col = myColors[4])
+    curve(B2.p,-10,30,n=n,add = TRUE,col = myColors[3])
+    curve(B3.p,-10,30,n=n,add = TRUE,col = myColors[2])
+    counter = counter+1
+  }
+  curve(B1.t,-10,30,n=n,col='black',add = TRUE,lwd=3)
+  curve(B2.t,-10,30,n=n,col='black',add = TRUE,lwd=3)
+  curve(B3.t,-10,30,n=n,col='black',add = TRUE,lwd=3)
+  
+  curve(B1.t,-10,30,n=n,col='black',xlab = 'Disease Time',ylab = "Marker Severity",main = 'Syndrome III')
+  counter = 1
+  while(counter<=nrow(syn2)){
+    C1.p = function(t){A1(t,B0=syn3[counter,1],B1=syn3[counter,2])}
+    C2.p = function(t){A1((t+syn3$delta[counter]-d2$lag1[counter]),B0=d2[counter,1],B1=d2[counter,2])}
+    C3.p = function(t){A1((t+syn3$delta[counter]-d3$lag2[counter]-d2$lag1[counter]),B0=d3[counter,1],B1=d3[counter,2])}
+    
+    curve(C1.p,-10,30,n=n,add = TRUE,col = myColors[3])
+    curve(C2.p,-10,30,n=n,add = TRUE,col = myColors[2])
+    curve(C3.p,-10,30,n=n,add = TRUE,col = myColors[4])
+    counter = counter+1
+  }
+  curve(B1.t,-10,30,n=n,col='black',add = TRUE,lwd=3)
+  curve(B2.t,-10,30,n=n,col='black',add = TRUE,lwd=3)
+  curve(B3.t,-10,30,n=n,col='black',add = TRUE,lwd=3)
+
+  dev.off()
+}

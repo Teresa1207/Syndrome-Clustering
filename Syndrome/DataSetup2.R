@@ -116,7 +116,7 @@ dataP = subset(df.melt,RID%in%samp1)
 #ggplot(dataP, aes(x = oTime,y = ve,group=RID,col=factor(variable)))+geom_line()+facet_grid(~Syndrome)+xlim(0,7)+
 #  scale_color_manual(values = myColors[2:4])
 
-l1 = ggplot()+
+l1 = ggplot()+theme_classic()+
   geom_line(data= subset(dataP,variable=="M1"),aes(x = dAge,y=ve,group=RID,color='M1'))+
   geom_line(data= subset(dataP,variable=="M2"),aes(x = dAge,y=ve,group= RID,color = 'M2'))+
   geom_line(data= subset(dataP,variable=="M3"),aes(x = dAge,y=ve,group= RID,color = 'M3'))+
@@ -124,7 +124,16 @@ l1 = ggplot()+
   scale_color_manual(values = myColors[2:4])+
   theme(legend.position='bottom',plot.title = element_blank(),legend.title=element_blank(),
         axis.title.x = element_text(size = 15))
-l2 = ggplot()+
+l1_sep = ggplot()+theme_classic()+
+  geom_line(data= subset(dataP,variable=="M1"&Syndrome==1),aes(x = dAge,y=ve,group=RID,color='M1'))+
+  geom_line(data= subset(dataP,variable=="M2"&Syndrome==1),aes(x = dAge,y=ve,group= RID,color = 'M2'))+
+  geom_line(data= subset(dataP,variable=="M3"&Syndrome==1),aes(x = dAge,y=ve,group= RID,color = 'M3'))+
+  #facet_grid(~Syndrome)+
+  xlim(-10,30)+ylab('Severity')+xlab('Disease Age')+
+  scale_color_manual(values = myColors[2:4])+
+  theme(legend.position='bottom',plot.title = element_blank(),legend.title=element_blank(),
+        axis.title.x = element_text(size = 15))
+l2 = ggplot()+theme_classic()+
   geom_line(data= subset(dataP,variable=="M1"),aes(x = tAge,y=ve,group=RID,color='M1'))+
   geom_line(data= subset(dataP,variable=="M2"),aes(x = tAge,y=ve,group= RID,color = 'M2'))+
   geom_line(data= subset(dataP,variable=="M3"),aes(x = tAge,y=ve,group= RID,color = 'M3'))+
@@ -132,6 +141,16 @@ l2 = ggplot()+
   scale_color_manual(values = myColors[2:4])+
   theme(legend.position='bottom',plot.title = element_blank(),legend.title=element_blank(),
         axis.title.x = element_text(size = 15))
+l2_sep = ggplot()+theme_classic()+
+  geom_line(data= subset(dataP,variable=="M1"&Syndrome==1),aes(x = tAge,y=ve,group=RID,color='M1'))+
+  geom_line(data= subset(dataP,variable=="M2"&Syndrome==1),aes(x = tAge,y=ve,group= RID,color = 'M2'))+
+  geom_line(data= subset(dataP,variable=="M3"&Syndrome==1),aes(x = tAge,y=ve,group= RID,color = 'M3'))+
+  #facet_grid(~Syndrome)+
+  ylab('Severity')+xlab('Age')+
+  scale_color_manual(values = myColors[2:4])+
+  theme(legend.position='bottom',plot.title = element_blank(),legend.title=element_blank(),
+        axis.title.x = element_text(size = 15))
+
 l3 = ggplot()+
   geom_line(data= subset(dataP,variable=="M1"),aes(x = oTime,y=ve,group=RID,color='M1'))+
   geom_line(data= subset(dataP,variable=="M2"),aes(x = oTime,y=ve,group= RID,color = 'M2'))+
@@ -151,12 +170,18 @@ g_legend<-function(a.gplot){
   legend <- tmp$grobs[[leg]]
   return(legend)}
 myleg = g_legend(l1)
-png('graphicl1a.png',width = 800)
+png('~/Documents/Dissertation/Dissertation_2017/Presentation/Presentation2/figures/group1.png',width = 800)
+l1_sep
+dev.off()
+png('~/Documents/Dissertation/Dissertation_2017/Presentation/Presentation2/figures/group1A.png',width = 800)
+l2_sep
+dev.off()
+png('~/Documents/Dissertation/Dissertation_2017/Presentation/Presentation2/figures/graphicl1a.png',width = 800)
 gL1a<- grid.arrange(arrangeGrob(l1 + theme(legend.position="none"),
                                 nrow=1),
                     myleg,nrow = 2, heights=c(10, 1))
 dev.off()
-png('graphicl1b.png',width = 800)
+png('~/Documents/Dissertation/Dissertation_2017/Presentation/Presentation2/figures/graphicl1b.png',width = 800)
 
 gL1b<- grid.arrange(arrangeGrob(l2 + theme(legend.position="none"),
                               nrow=1),

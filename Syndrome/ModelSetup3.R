@@ -110,6 +110,8 @@ B3.t = function(t){A1(t-10,D0,D1)}
 set2 = data.frame(syn2,d2,d3)
 set2 = set2[,order(colnames(set2))]
 
+
+
 ## Save out Set 1, Set 2 data sets ##
 saveRDS(set1,file = 'set1a.RDA')
 saveRDS(set2,file = 'set2a.RDA')
@@ -165,5 +167,12 @@ dontrun = function(n){
   curve(B1.t,-10,30,n=n,col='black',add = TRUE,lwd=3)
   curve(B2.t,-10,30,n=n,col='black',add = TRUE,lwd=3)
   curve(B3.t,-10,30,n=n,col='black',add = TRUE,lwd=3)
+  
+  
+  
+  
+  
+  
+  
   dev.off()
  }

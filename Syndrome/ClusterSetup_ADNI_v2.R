@@ -3,7 +3,7 @@
 # S2: Syndrome 2: Vascular-->HPCV, Amy is idependent. 
 # In syndrome 1, Amyloid advances to the 50th percentile prior to HPCV followed by vascular. 
 # In syndrome 2, Vascular advances to the 50th percentile prior to HPCV. Amyloid is indepenent. 
-setwd("/Users/Teresa/Documents/Dissertation/R_Dissertation/Syndrome")
+source('~/Documents/Dissertation/R_Dissertation/Syndrome/dataClus_ADNI.R')
 #########################################
 library(mvtnorm)
 library(MASS)
@@ -20,7 +20,7 @@ library(geepack)
 #set.seed(12071983)
 
 source('dataClus_ADNI.R')
-cS = 3
+cS = 2
 set4 = subset(mark.long,base3dx!='3:AD') 
 model <- function(x){
   fit1 = try(lm(qnorm(quant) ~ time,data=x))
@@ -90,7 +90,7 @@ valsCH
 
 
 
-p1 = ggplot(k2a,aes(x = b12,y = b13))+
+p1 = ggplot(k2a,aes(x = b23,y = b24))+
   geom_point(aes(shape = factor(clustB),color  = factor(clustB)),size = 4)+
   theme(legend.position="none")+geom_vline(xintercept = 0)+geom_hline(yintercept = 0)+ 
   xlab(expression('Amyloid - FDG,  Increasing Lag' %->% ''))+ylab(expression('FDG - HOC, Increasing Lag' %->% ''))+#scale_color_manual(values=myColors)+
@@ -170,7 +170,7 @@ saveRDS(m1,file = 'm1.RDA')
 
 m1$time1 = round_any(m1$time,.25)
 
-#m2 = merge(subset(set3,RID%in%k1$RID),k1,by = 'RID',all.x = TRUE)
+m2 = merge(subset(set3,RID%in%k1$RID),k1,by = 'RID',all.x = TRUE)
 m=m2
 ggplot(m,aes(x = M1,y = M3,group = RID,color = factor(clustB)))+geom_line()+facet_grid(~clustT)
 ggplot(m,aes(x = M1,y = M3,group = RID,color = factor(clustB)))+geom_line()+
@@ -212,6 +212,12 @@ ggplot(m,aes(x = M2,y = M3,group = RID,color = factor(Syndrome)))+geom_line()+
 ggplot(m,aes(x = M2,y = M3,group = RID,color = factor(clustB)))+geom_line()+
   stat_smooth(aes(group = factor(clustB)), color = 'black')
 
+
+
+
+
+#source('plotly_infor.R')
+donotrun = function(x){
 library(plotly)
 
 f <- list(
@@ -247,11 +253,12 @@ p
 p4 = plot_ly(data = k2a, x = b23,y = b24,name = 'ADNI Clusters',mode = "markers",color =factor(clustB))%>%
   layout(xaxis = list(title = "FDG lag"), yaxis =list(title = "HOC lag")) %>% layout(showlegend = FALSE)
 p4
-#source('plotly_infor.R')
-setwd("/Users/Teresa/Documents/Davis2015-2016/AAIC")
+
+  setwd("/Users/Teresa/Documents/Davis2015-2016/AAIC")
 
 plotly_IMAGE(p1, format = "png", out_file = "graphic5a.png",width = 1000,height = 800)
 plotly_IMAGE(p2, format = "png", out_file = "graphic5b.png",width = 1000,height = 800)
 plotly_IMAGE(p3, format = "png", out_file = "graphic5c.png",width = 1000,height = 800)
 plotly_IMAGE(p, format = "png", out_file = "graphic5.png",width = 1000,height = 800)
 plotly_IMAGE(p4, format = "png", out_file = "graphic6.png",width = 1000,height = 800)
+}

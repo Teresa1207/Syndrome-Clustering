@@ -19,13 +19,12 @@ library(clusterCrit)
 ###############################################################################
 ####### Cluster Design #######
 ###############################################################################
-pScen = 2
-sdScen = 3
-varScen = 8
-
+pScen = 3
+sdScen = 1
+varScen = 1
 #set.seed(12071983)
 counter = 1
-nRun = 2
+nRun = 5
 
 Index = matrix(0,nrow = nRun,ncol = 4)
 IndexS1 = matrix(0,nrow = nRun,ncol = 4)
@@ -35,6 +34,7 @@ IndexKM = matrix(0,nrow = nRun,ncol = 4)
 idx = matrix(0,nrow = nRun, ncol = 4)
 cS = 3
 while(counter<(nRun+1)){
+  
 source('ModelSetup_Serv.R')
 source('DataSetup_Serv.R')
 
@@ -68,6 +68,9 @@ cData1 = ddply(cComp,.(RID),summarise,
                b13 = (L1-L3)*(obs-1)+(S1 - S3)*(obs-1)^2/2#,
                #b23 = (L2-L3)*(obs-1)+(S2 - S3)*(obs-1)^2/2
 )
+gsP.Z <- clusGap(cData1[,-1], FUN = kmeans, K.max = 8, B = 500)
+plot(gsP.Z)
+
 
 k1 = data.frame(RID = cData1$RID,clustB =kmeans(cData1[,-1],cS,nstart=50)$cluster)
 
